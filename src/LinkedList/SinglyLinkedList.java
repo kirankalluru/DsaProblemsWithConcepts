@@ -1,7 +1,7 @@
 package LinkedList;
 
 // Node class
-class Node {
+class  Node {
     int data;
     Node next;
 
@@ -14,6 +14,7 @@ class Node {
 // Singly Linked List class
 public class SinglyLinkedList {
     Node head;
+
 
     // Insert at the end
     public void insert(int data) {
@@ -34,6 +35,94 @@ public class SinglyLinkedList {
         Node newNode = new Node(data);
         newNode.next = head;
         head = newNode;
+    }
+
+    //insert after specified Node
+
+    public void insetAfterNode(int data,int key){
+
+        Node curr = head;
+
+        while (curr != null){
+            if (curr.data == key){
+                break;
+            }
+            curr = curr.next;
+        }
+
+        if (curr == null){
+            System.out.println("Specific Node Not Found");
+            return;
+        }
+
+        Node newNode = new Node(data);
+        newNode.next = curr.next;
+        curr.next = newNode;
+
+
+    }
+
+
+    //inset Before Specified position
+
+    public void insetBeforeNode(int data,int key){
+
+        if (head == null){
+            System.out.println("Matching Node Not Found");
+            return;
+        }
+        //if head is the key then we need to handle it separately like below----------
+        if (head.data == key){
+            Node newNode = new Node(data);
+            newNode.next = head;
+            head = newNode;
+            return;
+        }
+
+        Node curr = head;
+        Node prev = null;
+
+        while (curr != null && curr.data != key){
+            prev = curr;
+            curr = curr.next;
+        }
+
+        if (curr != null){
+            Node NewNode = new Node(data);
+            prev.next = NewNode;
+            NewNode.next = curr;
+        }
+
+    }
+
+    //inset at specific Position
+
+    public void insertAtPosition(int data,int pos){
+        if (pos<1){
+            return;
+        }
+        if (pos == 1){
+            Node newNode = new Node(data);
+            newNode.next = head;
+            head = newNode;
+            return;
+        }
+        Node curr = head;
+
+        //traverse before the specified position
+        for (int i = 1; i <pos-1 && curr != null ; i++) {
+            curr = curr.next;
+        }
+
+        if (curr == null){
+            System.out.println("Position is Not Found/Position is not in Range");
+            return;
+        }
+
+        Node newNode = new Node(data);
+        newNode.next = curr.next;
+        curr.next = newNode;
+
     }
 
     // Delete a node by value
@@ -80,16 +169,16 @@ public class SinglyLinkedList {
     // Main method to test
     public static void main(String[] args) {
         SinglyLinkedList list = new SinglyLinkedList();
+        SinglyLinkedList list1 = new SinglyLinkedList();
         list.insert(10);
         list.insert(20);
-        list.insertAtBeginning(5);
-        list.display(); // 5 -> 10 -> 20 -> null
-
-        list.delete(10);
-        list.display(); // 5 -> 20 -> null
-
-        System.out.println("Is 20 in list? " + list.search(20)); // true
-        System.out.println("Is 15 in list? " + list.search(15)); // false
+        list.insert(30);
+        list.insert(40);
+        list.display();
+        list.insetBeforeNode(15,10);
+        list.display();
+        list.insertAtPosition(2,8);
+        list.display();
     }
 }
 
