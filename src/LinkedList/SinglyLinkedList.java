@@ -63,7 +63,7 @@ public class SinglyLinkedList {
     }
 
 
-    //inset Before Specified position
+    //inset Before Specified NODE
 
     public void insetBeforeNode(int data,int key){
 
