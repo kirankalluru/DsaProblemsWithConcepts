@@ -144,6 +144,33 @@ public class SinglyLinkedList {
         }
     }
 
+    //delete node at specific position
+
+    public void deleteAtPosition(int pos){
+        if (head == null){
+            return;
+        }
+        if (pos<1){
+            System.out.println("Invalid Position");
+            return;
+        }
+        if (pos == 1){
+            head = head.next;
+            return;
+        }
+
+        Node curr = head;
+        for (int i = 1; i < pos-1 && curr != null; i++) {
+            curr = curr.next;
+        }
+
+        if (curr == null || curr.next == null){
+            System.out.println("Invalid Position");
+            return;
+        }
+            curr.next = curr.next.next;
+    }
+
     // Search for a value
     public boolean search(int key) {
         Node current = head;
@@ -174,10 +201,7 @@ public class SinglyLinkedList {
         list.insert(20);
         list.insert(30);
         list.insert(40);
-        list.display();
-        list.insetBeforeNode(15,10);
-        list.display();
-        list.insertAtPosition(2,8);
+        list.deleteAtPosition(5);
         list.display();
     }
 }
