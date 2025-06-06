@@ -171,6 +171,25 @@ public class SinglyLinkedList {
             curr.next = curr.next.next;
     }
 
+
+    //deletion at end of list
+
+    public void deleteAtEnd(){
+        if (head == null){
+            System.out.println("Empty List");
+            return;
+        }
+
+        Node curr = head;
+
+        while (curr.next.next!=null){
+            curr = curr.next;
+        }
+
+        curr.next = null;
+
+    }
+
     // Search for a value
     public boolean search(int key) {
         Node current = head;
@@ -182,6 +201,37 @@ public class SinglyLinkedList {
         }
         return false;
     }
+
+    //reverse a linked List
+
+    public void reverse(){
+        if (head == null){
+            System.out.println("Empty List");
+            return;
+        }
+
+        if (head.next == null){
+            return;
+        }
+
+        Node prev = null,curr = head,next;
+
+        while (curr != null){
+            next = curr.next;
+
+
+            //link to backward node
+            curr.next = prev;
+
+            prev = curr;
+            curr = next;
+        }
+
+        head = prev;
+
+    }
+
+
 
     // Display the list
     public void display() {
@@ -196,12 +246,12 @@ public class SinglyLinkedList {
     // Main method to test
     public static void main(String[] args) {
         SinglyLinkedList list = new SinglyLinkedList();
-        SinglyLinkedList list1 = new SinglyLinkedList();
+
         list.insert(10);
         list.insert(20);
         list.insert(30);
         list.insert(40);
-        list.deleteAtPosition(5);
+        list.reverse();
         list.display();
     }
 }
