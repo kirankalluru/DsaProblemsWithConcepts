@@ -230,6 +230,27 @@ public class SinglyLinkedList {
         head = prev;
 
     }
+    
+    //return  middle node data.
+
+    public int middleData(){
+        if (head == null){
+            return -1;
+        }
+        if (head.next == null){
+            return head.data;
+        }
+
+        Node slow_ptr = head;
+        Node fast_ptr = head;
+
+        while (fast_ptr != null && fast_ptr.next != null){
+            fast_ptr = fast_ptr.next.next;
+            slow_ptr = slow_ptr.next;
+        }
+
+        return slow_ptr.data;
+    }
 
 
 
@@ -251,8 +272,10 @@ public class SinglyLinkedList {
         list.insert(20);
         list.insert(30);
         list.insert(40);
-        list.reverse();
-        list.display();
+        list.insert(50);
+        list.insert(60);
+        System.out.println(list.middleData());
+
     }
 }
 
