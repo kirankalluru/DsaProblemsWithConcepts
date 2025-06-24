@@ -1,6 +1,7 @@
 package Recursion;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Maze {
     public static void main(String[] args) {
@@ -10,10 +11,12 @@ public class Maze {
 //        System.out.println(pathDiagonal("",3,3));
         boolean[][] maze = {
                 {true,true,true},
-                {true,false,true},
+                {true,true,true},
                 {true,true,true}
         };
-        System.out.println(pathWithRestrictionsBackTrack("",maze,0,0));
+//        System.out.println(pathWithRestrictionsBackTrack("",maze,0,0));
+        int[][] path = new int[maze.length][maze[0].length];
+        pathPrint("",maze,0,0,path,1);
     }
 
     static  int noOfPaths(int r,int c){
@@ -146,6 +149,52 @@ public class Maze {
         maze[r][c] = true;
 
         return list;
+    }
+
+
+
+    static void pathPrint(String p, boolean[][] maze, int r, int c, int[][] path, int step){
+        if(r == maze.length-1 && c == maze[0].length-1){
+            path[r][c] = step;
+            for (int[] arr:path){
+                System.out.println(Arrays.toString(arr));
+            }
+            System.out.println(p);
+            System.out.println();
+            return;
+        }
+
+        if (!maze[r][c]){
+            return;
+        }
+
+        maze[r][c] = false;
+        path[r][c] = step;
+
+        if(r<maze.length-1 && c<maze[0].length-1){
+            pathPrint(p+"d",maze,r+1,c+1,path,step+1);
+        }
+
+        if(r < maze.length-1){
+            pathPrint(p+"D",maze,r+1,c,path,step+1);
+        }
+
+        if(r > 0){
+            pathPrint(p+"U",maze,r-1,c,path,step+1);
+        }
+
+
+        if (c < maze[0].length-1){
+            pathPrint(p+"R",maze,r,c+1,path,step+1);
+        }
+
+        if (c > 0){
+            pathPrint(p+"L",maze,r,c-1,path,step+1);
+        }
+
+        //This function is about to over so please make sure to change all the changes has been made just revert those changes
+        maze[r][c] = true;
+        path[r][c] = 0;
     }
 
 
