@@ -16,6 +16,7 @@ public class MostFrequentPair {
                 String pair = ""+word.charAt(0)+word.charAt(word.length()-1);
                 freq.put(pair,freq.getOrDefault(pair,0)+1);
             }
+
         }
 
         int max = Collections.max(freq.values());
